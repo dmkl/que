@@ -79,7 +79,7 @@ module Que
           attrs[:priority] = p
         end
 
-        if q = queue || @queue
+        if q = queue || @queue || args.first['queue_name']
           attrs[:queue] = q
         end
 
