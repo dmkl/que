@@ -5,6 +5,7 @@ require 'uri'
 require 'pg'
 require 'logger'
 require 'json'
+require 'pry'
 
 Dir['./spec/support/**/*.rb'].sort.each &method(:require)
 
@@ -44,6 +45,16 @@ QUE_ADAPTERS = {:pg => Que.adapter}
 # We use Sequel to examine the database in specs.
 require 'sequel'
 DB = Sequel.connect(QUE_URL)
+
+
+
+if ENV['CI']
+  DB.synchronize do |conn|
+    puts "Ruby #{RUBY_VERSION}"
+    puts "Sequel #{Sequel::VERSION}"
+    puts conn.async_exec("SELECT version()").to_a.first['version']
+  end
+end
 
 
 
