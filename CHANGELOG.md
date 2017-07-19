@@ -1,6 +1,22 @@
+### 0.13.1 (2017-07-05)
+
+*   Fix issue that caused error stacktraces to not be persisted in most cases.
+
+### 0.13.0 (2017-06-08)
+
+*   Fix recurring JSON issues by dropping MultiJson support. Previously MultiJson was detected and used automatically, and now it's just ignored and stdlib JSON used instead, so this shouldn't require any code changes.
+
+### 0.12.3 (2017-06-01)
+
+*   Fix incompatibility with MultiJson introduced by the previous release.
+
+### 0.12.2 (2017-06-01)
+
+*   Fix security vulnerability in parsing JSON from the DB (by specifying create_additions: false). This shouldn't be a concern unless you were passing untrusted user input in your job arguments. (hmac)
+
 ### 0.12.1 (2017-01-22)
 
-* Fix incompatibility with Rails 5.0. (#166) (nbibler, thedarkone)
+*   Fix incompatibility with Rails 5.0. (#166) (nbibler, thedarkone)
 
 ### 0.12.0 (2016-09-09)
 
