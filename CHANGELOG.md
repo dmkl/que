@@ -1,3 +1,27 @@
+### 0.14.3 (2018-03-02)
+
+*   Recorded errors now always include the error class, so that empty error messages can still be helpful. (  joehorsnell)
+
+*   Recorded error messages are now truncated to the first 500 characters.
+
+### 0.14.2 (2018-01-05)
+
+*   Deprecate the Que.disable_prepared_statements= accessors.
+
+*   Add Que.use_prepared_statements= configuration accessors.
+
+*   Update the generated Rails migration to declare a version. (NARKOZ)
+
+### 0.14.1 (2017-12-14)
+
+*   Fix a bug with typecasting boolean values on Rails 5+.
+
+### 0.14.0 (2017-08-11)
+
+*   Fix incompatibility with Rails 5.1.
+
+*   Drop support for waking an in-process worker when an ActiveRecord transaction commits.
+
 ### 0.13.1 (2017-07-05)
 
 *   Fix issue that caused error stacktraces to not be persisted in most cases.

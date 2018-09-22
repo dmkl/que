@@ -67,7 +67,7 @@ module Que
         checkout do |conn|
           # Prepared statement errors have the potential to foul up the entire
           # transaction, so if we're in one, err on the side of safety.
-          return execute_sql(SQL[name], params) if Que.disable_prepared_statements || in_transaction?
+          return execute_sql(SQL[name], params) if !Que.use_prepared_statements || in_transaction?
 
           statements = @prepared_statements[conn] ||= {}
 
@@ -105,7 +105,13 @@ module Que
       CAST_PROCS[114] = -> (value) { JSON.parse(value, create_additions: false) }
 
       # Boolean:
-      CAST_PROCS[16] = 't'.method(:==)
+      CAST_PROCS[16] = -> (value) {
+        case value
+        when String then value == 't'
+        when TrueClass, FalseClass then value
+        else raise "Unexpected boolean value: #{value.inspect} (#{value.class})"
+        end
+      }
 
       def cast_result(result)
         output = result.to_a
